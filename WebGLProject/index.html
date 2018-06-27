@@ -13,7 +13,10 @@
         <script>
                         
             // Declare global variables
-            var scene, cam, renderer, controls;
+            var scene, 
+                cam, 
+                renderer, 
+                controls;
             
             // Call main
             main();
@@ -85,11 +88,11 @@
                 
                 // 3) Load the Katrina.dae file.
                 loader.load('Data/Katrina.dae', function(hurricaneModel) {
-                                        hurricaneModel.scene.children[0].material = hurricaneMaterial;
-                                        scene.add(hurricaneModel.scene.children[0]);
-                                        renderScene();
-                                    }
-                );         
+                                                hurricaneModel.scene.children[0].material = hurricaneMaterial;
+                                                scene.add(hurricaneModel.scene.children[0]);
+                                                renderScene();
+                                            }
+                                        );
             }
                 
             
