@@ -11,8 +11,7 @@
         <script src="three/ColladaLoader.js"></script>
         
         <script>
-            
-            // Our script goes here
+                        
             // Declare global variables
             var scene, cam, renderer, controls;
             
@@ -25,8 +24,7 @@
                 updateLoop();
             }
             
-            function initializeScene(){
-                // subsequent sections pasted here
+            function initializeScene(){                
                 // 1) Initialize the scene variable with a three.js scene object.
                 scene = new THREE.Scene();
                 
@@ -58,6 +56,9 @@
                 var jack = new THREE.AxesHelper(3);
                 scene.add(jack);
                 
+                // Call loadMesh function before appending the renderer to the document body
+                loadMesh();
+
                 // 7) Lastly for the initializeScene() function, the renderer is added to the page
                 document.body.appendChild(renderer.domElement);
             }
@@ -71,6 +72,26 @@
             // Define renderScene
             function renderScene(){
             renderer.render(scene, cam);
+            
+            // Define a function to load the data
+            function loadMesh(){
+                // 1) Declare a loader object to load the data.
+                var loader = new THREE.ColladaLoader();
+                
+                // 2) Create a material for the object.
+                var hurricaneMaterial = new THREE.MeshLambertMaterial();
+                hurricaneMaterial.vertexColors = 1;
+                
+                // 3) Load the Katrina.dae file.
+                loader.load('Data/Katrina.dae', function(hurricaneModel) {
+                                        hurricaneModel.scene.children[0].material = hurricaneMaterial;
+                                        scene.add(hurricaneModel.scene.children[0]);
+                                        renderScene();
+                                    }
+                );         
+            }
+                
+            
     }
         </script>
     </body>
