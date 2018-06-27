@@ -4,9 +4,50 @@
         <meta charset="utf-8">
     </head>
     <body style="margin: 0;">
+        
         <!-- Include JavaScript libraries here -->
+        <script src="three/three.js"></script>
+        <script src="three/OrbitControls.js"></script>
+        <script src="three/ColladaLoader.js"></script>
+        
         <script>
+            
             // Our script goes here
+            // Declare global variables
+            var scene, cam, renderer, controls;
+            
+            // Call main
+            main();
+            
+            // Define main: initializes required objects and updates scene
+            function main(){
+                initializeScene();
+                updateLoop();
+            }
+            
+            function initializeScene(){
+                // subsequent sections pasted here
+                // 1) Initialize the scene variable with a three.js scene object.
+                scene = new THREE.Scene();
+                
+                // 2) Initialize the camera variable and set its position.
+                cam = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+                cam.position.set(3, 2, 3);
+                
+                // 3) Initialize the renderer with a three.js WebGLRenderer object, and enable antialiasing.
+                renderer = new THREE.WebGLRenderer({antialias: true});
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setClearColor(0x525252, 1);
+                
+                // 4) Initialize the controls with a three.js OrbitCOntrols object, attach the controls to
+                // camera and add controls to the renderer DOM element.
+                controls = new THREE.OrbitControls(cam, renderer.domElement);
+                controls.enableDamping = true;
+                controls.target.set(0.0, 1.16, 0.0);
+                controls.addEventListener('change', renderScene);
+
+            }
         </script>
     </body>
 </html>
